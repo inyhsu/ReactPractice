@@ -10,7 +10,12 @@ const menuItemStyle = {
 function MenuItem(props) {
     //const isOpenUtil = useContext(OpenContext);
     console.log('MenuItem Render')
-    return <li style={menuItemStyle}>{props.text}</li>
+    return <li
+        style={menuItemStyle}
+        onClick={() => { props.handleClick() }}
+    >
+        {props.text}
+    </li>
 }
 
 export default memo(MenuItem)
