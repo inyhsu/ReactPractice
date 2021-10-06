@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { OpenContext } from '../context/ControlContext';
 
 const menuContainerStyle = {
     position: "relative",
@@ -34,24 +35,24 @@ const menuStyle = {
 
 
 export default function Menu({ title, children }) {
-    const [isOpen, setIsOpen] = useState(false)
+    const isOpenUtil = useContext(OpenContext);
 
-    useEffect(() => {
-        if (isOpen) {
-            document.getElementsByClassName("menu-btn")[0].textContent = "^";
-            document.getElementsByClassName("menu")[0].style.display = "block";
-        } else {
-            document.getElementsByClassName("menu-btn")[0].textContent = "V";
-            document.getElementsByClassName("menu")[0].style.display = "none";
-        }
-    }, [isOpen]);
-
+    // useEffect(() => {
+    //     if (isOpen) {
+    //         document.getElementsByClassName("menu-btn")[0].textContent = "^";
+    //         document.getElementsByClassName("menu")[0].style.display = "block";
+    //     } else {
+    //         document.getElementsByClassName("menu-btn")[0].textContent = "V";
+    //         document.getElementsByClassName("menu")[0].style.display = "none";
+    //     }
+    // }, [isOpen]);
+    console.log('Menu Render')
 
     return (
         <div style={menuContainerStyle}>
             <p style={menuTitleStyle}>{title}</p>
-            <button className="menu-btn"style={menuBtnStyle} onClick={() => { setIsOpen(!isOpen) }}>
-                V
+            <button className="menu-btn" style={menuBtnStyle} onClick={() => { isOpenUtil.setOpenContext(!isOpenUtil.openContext) }}>
+                {(isOpenUtil.openContext) ? "^" : "V"}
             </button>
             <ul className="menu">{children}</ul>
         </div>

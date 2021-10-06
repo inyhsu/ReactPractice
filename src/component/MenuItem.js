@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, memo } from 'react';
+import { OpenContext } from '../context/ControlContext';
 
 const menuItemStyle = {
     marginBottom: "7px",
@@ -6,7 +7,10 @@ const menuItemStyle = {
     listStyle: "none"
 };
 
-export default function MenuItem(props) {
+function MenuItem(props) {
+    //const isOpenUtil = useContext(OpenContext);
+    console.log('MenuItem Render')
     return <li style={menuItemStyle}>{props.text}</li>
 }
 
+export default memo(MenuItem)
