@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { OpenContext } from '../context/ControlContext';
+import { OpenContext, SetOpenContext } from '../context/ControlContext';
 
 const menuContainerStyle = {
     position: "relative",
@@ -36,6 +36,7 @@ const menuStyle = {
 
 export default function Menu({ title, children }) {
     const isOpenUtil = useContext(OpenContext);
+    const setIsOpen = useContext(SetOpenContext);
 
     // useEffect(() => {
     //     if (isOpen) {
@@ -51,10 +52,10 @@ export default function Menu({ title, children }) {
     return (
         <div style={menuContainerStyle}>
             <p style={menuTitleStyle}>{title}</p>
-            <button className="menu-btn" style={menuBtnStyle} onClick={() => { isOpenUtil.setOpenContext(!isOpenUtil.openContext) }}>
-                {(isOpenUtil.openContext) ? "^" : "V"}
+            <button className="menu-btn" style={menuBtnStyle} onClick={() => { setIsOpen(!isOpenUtil) }}>
+                {(isOpenUtil) ? "^" : "V"}
             </button>
-            <ul className="menu">{children}</ul>
+            { isOpenUtil && <ul className="menu">{children}</ul>}
         </div>
     );
 }

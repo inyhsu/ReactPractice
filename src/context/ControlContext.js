@@ -1,6 +1,4 @@
 import React from "react";
 
-export const OpenContext = React.createContext({
-    openContext: true,
-    setOpenContext: ()=>{},
-})
+export const OpenContext = React.createContext(true)
+export const SetOpenContext = React.createContext( ()=>{})

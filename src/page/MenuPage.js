@@ -1,7 +1,7 @@
 import React, { useState, useRef, useCallback, useMemo } from 'react';
 import MenuItem from '../component/MenuItem';
 import Menu from '../component/Menu';
-import { OpenContext } from '../context/ControlContext';
+import { OpenContext, SetOpenContext } from '../context/ControlContext';
 
 let menuItemWording = [
     "Like的發問",
@@ -19,24 +19,21 @@ const MenuPage = () => {
     /* 定義列印函式 */
     const handleClick = useCallback(() => {
         console.log("counter is " + renderCounter.current);
-    },[renderCounters])
+    }, [renderCounter])
 
-    let menuItemArr = useMemo(() => {
-        menuItemWording.map((wording) => {
-            return <MenuItem text={wording} handleClick={handleClick}/>
-        });
-    }) 
+    const menuItemArr = useMemo(() => {
+        return menuItemWording.map((wording) => <MenuItem text={wording} />)
+    }, []);
 
     return (
         <OpenContext.Provider
-            value={{
-                openContext: isOpen,
-                setOpenContext: setIsOpen
-            }}
+            value={isOpen}
         >
-            <Menu title={"賴可"}>
-                {menuItemArr}
-            </Menu>
+            <SetOpenContext.Provider value={setIsOpen}>
+                <Menu title={"賴可"}>
+                    {menuItemArr}
+                </Menu>
+            </SetOpenContext.Provider>
         </OpenContext.Provider>
     );
 }

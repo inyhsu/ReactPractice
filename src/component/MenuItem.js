@@ -1,5 +1,5 @@
 import React, { useState, useContext, memo } from 'react';
-import { OpenContext } from '../context/ControlContext';
+import { SetOpenContext } from '../context/ControlContext';
 
 const menuItemStyle = {
     marginBottom: "7px",
@@ -8,14 +8,14 @@ const menuItemStyle = {
 };
 
 function MenuItem(props) {
-    //const isOpenUtil = useContext(OpenContext);
+    const setIsOpen  = useContext(SetOpenContext);
     console.log('MenuItem Render')
     return <li
         style={menuItemStyle}
-        onClick={() => { props.handleClick() }}
+        onClick={()=>{setIsOpen(false)}}
     >
         {props.text}
     </li>
 }
 
-export default memo(MenuItem)
+export default MenuItem
